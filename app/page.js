@@ -78,9 +78,9 @@ export default function Home() {
       </div>
       <div className="bg-white mt-10 h-0.5 opacity-10"></div>
       <div className="text-white container mx-auto pb-32 pt-14 flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold text-center my-14">
+        <h2 className="text-3xl font-bold text-center my-14">
           Learn more about us
-        </h1>
+        </h2>
         <iframe
           width="560"
           height="315"
