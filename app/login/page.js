@@ -2,9 +2,12 @@ import React from 'react'
 
 const Login = () => {
   return (
-    <div>
-      <h1>Login page here</h1>
-    </div>
+  <div className="text-white py-14 container mx-auto">
+    <h1 className='text-center font-bold text-3xl'>Login/Signup to get your fans to support you</h1>
+  
+  </div>
+
+
   )
 }
 
