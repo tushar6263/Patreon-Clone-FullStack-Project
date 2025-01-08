@@ -6,16 +6,13 @@ import Link from 'next/link'
 const Navbar = () => {
     const { data: session } = useSession()
     const [showdropdown, setShowdropdown] = useState(false)
-    // if(session) {
-    //     return <>
-    //       Signed in as {session.user.email} <br/>
-    //       <button onClick={() => signOut()}>Sign out</button>
-    //     </>
-      // }
+    
     return (
         <nav className='bg-neutral-950 shadow-lg text-white flex justify-between items-center px-4 h-16'>
-            <div className="logo font-bold text-lg flex justify-center items-center">
-                <img src="tea.gif" width={44} alt="" /><span>GetMeaChai!</span></div>
+            
+              <Link className="logo font-bold text-lg flex justify-center items-center" href={"/"}>
+                <img src="tea.gif" width={44} alt="" /><span>GetMeaChai!</span>
+                </Link>
             {/* <ul className="flex justify-between gap-4">
                 <li>Home</li>
                 <li>About</li>
@@ -23,7 +20,7 @@ const Navbar = () => {
                 <li>Sign Up</li>
                 <li>Login</li>
             </ul> */}
-            <div>
+            <div  className='relative'>
             {session && <>
           <button onClick={() => setShowdropdown(!showdropdown)} onBlur={() => {
             setTimeout(() => {
