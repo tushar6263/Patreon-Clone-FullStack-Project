@@ -24,14 +24,33 @@ const Username = ({ params }) => {
         <div className="payment flex gap-3 w-[80%] mt-7">
           <div className="supporters w-1/2 rounded-lg bg-neutral-900 text-white p-10">
             <h2 className='text-2xl font-bold my-5 '>Supporters</h2>
-            <ul className='mx-5'>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
-              <li className='my-2'>Tushar donated $400 with the message ""</li>
+            <ul className='mx-3'>
+              <li className='my-4 flex gap-2 items-center'>
+                <img width={33} src="avatar.gif" alt="" />
+                <span>
+                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
+                </span>
+              </li>
+              <li className='my-4 flex gap-2 items-center'>
+                <img width={33} src="avatar.gif" alt="" />
+                <span>
+                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
+                </span>
+              </li>
+              <li className='my-4 flex gap-2 items-center'>
+                <img width={33} src="avatar.gif" alt="" />
+                <span>
+                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
+                </span>
+              </li>
+              <li className='my-4 flex gap-2 items-center'>
+                <img width={33} src="avatar.gif" alt="" />
+                <span>
+                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
+                </span>
+              </li>
+
+
 
             </ul>
           </div>
@@ -45,7 +64,10 @@ const Username = ({ params }) => {
 
 
               <input type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Amount' />
-              <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+              <button
+                type="button"
+                className="  text-white hover:text-black border border-white hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-black dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+              >
                 Pay
               </button>
             </div>
