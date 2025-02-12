@@ -11,7 +11,7 @@ const Navbar = () => {
         <nav className='bg-neutral-900 shadow-lg text-white flex justify-between items-center px-4 h-16'>
             
               <Link className="logo font-bold text-lg flex justify-center items-center" href={"/"}>
-                <img src="tea.gif" width={44} alt="" /><span>GetMeaChai!</span>
+                <img className='invertImg' src="tea.gif" width={44} alt="" /><span>GetMeaChai!</span>
                 </Link>
             {/* <ul className="flex justify-between gap-4">
                 <li>Home</li>
