@@ -1,7 +1,7 @@
 
 import mongoose from "mongoose";
 
-const connectDB = async () => {
+const connectDb = async () => {
         try {
             const conn = await mongoose.connect(`mongodb://localhost:27017/chai`, {
                 useNewUrlParser: true,
@@ -15,4 +15,4 @@ const connectDB = async () => {
         }
     }
 
-  export default connectDB;
+  export default connectDb;
