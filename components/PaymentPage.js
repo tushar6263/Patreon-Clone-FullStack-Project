@@ -1,32 +1,44 @@
 "use client"
-import React from 'react'
+import React ,{useState,useEffect} from 'react'
 import Script from 'next/script'
-import { initiate } from '@/actions/useraction'
-import { useState } from 'react'
 import { useSession } from 'next-auth/react'
+import {fetchuser , fetchpayments , initiate} from '@/actions/useraction'
 
 const PaymentPage = ({ username }) => {
   //const { data:session } =useSession()
 
-  const [Paymentform, setPaymentform] = useState({})
+  const [paymentform, setPaymentform] = useState({})
+  const [currentUser, setcurrentUser] = useState({})
+  const [payments , setPayments] = useState([])
 
-  const handleChange = (e) => {
-    setPaymentform({ ...Paymentform, [e.target.name]: e.target.value })
-  }
+  useEffect(()=>{
+    getData()
+  },[])
+
+   const handleChange = (e) => {
+        setPaymentform({ ...paymentform, [e.target.name]: e.target.value })
+    }
+
+    const getData = async (params)=>{
+      let u =  await fetchuser(username)
+      setcurrentUser(u)
+      let dbpayments = await fetchpayments(usernam)
+      setPayments(dbpayments)
+    }
 
   const pay = async (amount) => {
     // Get the order Id
-    let a = await initiate(amount,username, Paymentform)
+    let a = await initiate(amount,username, paymentform)
     let orderId = a.id
     var options = {
-      "key": process.env.KEY_ID, // Enter the Key ID generated from the Dashboard
+      "key": process.env.NEXT_PUBLIC_KEY_ID, // Enter the Key ID generated from the Dashboard
       "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       "currency": "INR",
       "name": "Get Me A Chai", //your business name
       "description": "Test Transaction",
       "image": "https://example.com/your_logo",
       "order_id": orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      "callback_url": `${process.env.URL}/api/razorpay`,
+      "callback_url": `${process.env.NEXT_PUBLIC_URL}/api/razorpay`,
       "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
         "name": "Gaurav Kumar", //your customer's name
         "email": "gaurav.kumar@example.com",
@@ -104,11 +116,11 @@ const PaymentPage = ({ username }) => {
             <h2 className='text-2xl font-bold my-5 '>Make a Payment</h2>
             <div className="flex gap-2 flex-col">
               {/* input for name and message */}
-              <input onChange={handleChange} value={Paymentform.name} name='name' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Name' />
-              <input onChange={handleChange} value={Paymentform.message} name='message' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Message' />
+              <input onChange={handleChange} value={paymentform.name} name='name' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Name' />
+              <input onChange={handleChange} value={paymentform.message} name='message' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Message' />
 
 
-              <input onChange={handleChange} value={Paymentform.amount} name="amount" type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Amount' />
+              <input onChange={handleChange} value={paymentform.amount} name="amount" type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Amount' />
               <button
                 type="button"
                 className="  text-white hover:text-black border border-white hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-black dark:hover:bg-gray-600 dark:focus:ring-gray-800"
