@@ -1,34 +1,34 @@
 "use client"
-import React ,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Script from 'next/script'
 import { useSession } from 'next-auth/react'
-import {fetchuser , fetchpayments , initiate} from '@/actions/useraction'
+import { fetchuser, fetchpayments, initiate } from '@/actions/useraction'
 
 const PaymentPage = ({ username }) => {
   //const { data:session } =useSession()
 
   const [paymentform, setPaymentform] = useState({})
   const [currentUser, setcurrentUser] = useState({})
-  const [payments , setPayments] = useState([])
+  const [payments, setPayments] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
-  },[])
+  }, [])
 
-   const handleChange = (e) => {
-        setPaymentform({ ...paymentform, [e.target.name]: e.target.value })
-    }
+  const handleChange = (e) => {
+    setPaymentform({ ...paymentform, [e.target.name]: e.target.value })
+  }
 
-    const getData = async (params)=>{
-      let u =  await fetchuser(username)
-      setcurrentUser(u)
-      let dbpayments = await fetchpayments(usernam)
-      setPayments(dbpayments)
-    }
+  const getData = async (params) => {
+    let u = await fetchuser(username)
+    setcurrentUser(u)
+    let dbpayments = await fetchpayments(username)
+    setPayments(dbpayments)
+  }
 
   const pay = async (amount) => {
     // Get the order Id
-    let a = await initiate(amount,username, paymentform)
+    let a = await initiate(amount, username, paymentform)
     let orderId = a.id
     var options = {
       "key": process.env.NEXT_PUBLIC_KEY_ID, // Enter the Key ID generated from the Dashboard
@@ -82,31 +82,14 @@ const PaymentPage = ({ username }) => {
           <div className="supporters w-1/2 rounded-lg bg-neutral-900 text-white p-10">
             <h2 className='text-2xl font-bold my-5 '>Supporters</h2>
             <ul className='mx-3'>
-              <li className='my-4 flex gap-2 items-center'>
-                <img width={33} src="avatar.gif" alt="" />
-                <span>
-                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
-                </span>
-              </li>
-              <li className='my-4 flex gap-2 items-center'>
-                <img width={33} src="avatar.gif" alt="" />
-                <span>
-                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
-                </span>
-              </li>
-              <li className='my-4 flex gap-2 items-center'>
-                <img width={33} src="avatar.gif" alt="" />
-                <span>
-                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
-                </span>
-              </li>
-              <li className='my-4 flex gap-2 items-center'>
-                <img width={33} src="avatar.gif" alt="" />
-                <span>
-                  Tushar donated <span className='font-bold'>$33 </span>with a message "I Support you bro. Lots of Love"
-                </span>
-              </li>
-
+              {payments.map((p, i) => {
+                return <li key={i} className='my-4 flex gap-2 items-center'>
+                  <img width={33} src="avatar.gif" alt="" />
+                  <span>
+                    {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message "{p.message}"
+                  </span>
+                </li>
+              })}
 
 
             </ul>
@@ -121,7 +104,7 @@ const PaymentPage = ({ username }) => {
 
 
               <input onChange={handleChange} value={paymentform.amount} name="amount" type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Amount' />
-              <button
+              <button onClick={() => pay(Number.parseInt(paymentform.amount) * 100)}
                 type="button"
                 className="  text-white hover:text-black border border-white hover:bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-black dark:hover:bg-gray-600 dark:focus:ring-gray-800"
               >
