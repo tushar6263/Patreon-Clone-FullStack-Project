@@ -4,6 +4,7 @@ import Script from 'next/script'
 import { useSession } from 'next-auth/react'
 import { fetchuser, fetchpayments, initiate } from '@/actions/useraction'
 
+
 const PaymentPage = ({ username }) => {
   //const { data:session } =useSession()
 
@@ -31,7 +32,7 @@ const PaymentPage = ({ username }) => {
     let a = await initiate(amount, username, paymentform)
     let orderId = a.id
     var options = {
-      "key": process.env.NEXT_PUBLIC_KEY_ID, // Enter the Key ID generated from the Dashboard
+      "key": currentUser.razorpayid,// Enter the Key ID generated from the Dashboard
       "amount": amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
       "currency": "INR",
       "name": "Get Me A Chai", //your business name
@@ -61,9 +62,9 @@ const PaymentPage = ({ username }) => {
 
 
       <div className='cover w-full relative bg-red-50 '>
-        <img className='object-cover  w-full h-[350]' src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/971275/e81e9167015c466486e62f3ccbd2e912/eyJ3Ijo5NjAsIndlIjoxfQ%3D%3D/1.jpg?token-time=1738627200&token-hash=2kN9IWDGCf-CmfrPq7H6urHLB570fmkS7KWkqY7CCL4%3D" alt="" />
+      <img className='object-cover w-full h-48 md:h-[350px] ' src={currentUser.coverpic} alt="" />
         <div className=' -bottom-10 right-[47%] absolute '>
-          <img width={80} height={80} className=' border-white border-2 rounded-full' src="https://c10.patreonusercontent.com/4/patreon-media/p/campaign/971275/2406ebe9b7cf44fe9059249e573f8aa7/eyJoIjoxMDgwLCJ3IjoxMDgwfQ%3D%3D/1.jpg?token-time=1739145600&token-hash=YJJ4kgJqbHW5N5R3zR3ooHtHchb3yEsi7qIV3g6j3dM%3D" alt="" />
+          <img width={80} height={80} className=' border-white border-2 rounded-full' src={currentUser.profilepic} alt="" />
         </div>
       </div>
       <div className=" info flex justify-center items-center my-12  flex-col gap-2">
@@ -82,11 +83,12 @@ const PaymentPage = ({ username }) => {
           <div className="supporters w-1/2 rounded-lg bg-neutral-900 text-white p-10">
             <h2 className='text-2xl font-bold my-5 '>Supporters</h2>
             <ul className='mx-3'>
+              {payments.length == 0 && <li>No payments yet</li>}
               {payments.map((p, i) => {
                 return <li key={i} className='my-4 flex gap-2 items-center'>
                   <img width={33} src="avatar.gif" alt="" />
                   <span>
-                    {p.name} donated <span className='font-bold'>₹{p.amount}</span> with a message "{p.message}"
+                    {p.name} donated <span className='font-bold text-green-300'>₹{p.amount}</span> with a message <span className='font-bold text-green-300'>"{p.message}"</span>
                   </span>
                 </li>
               })}
