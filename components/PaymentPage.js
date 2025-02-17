@@ -3,24 +3,49 @@ import React, { useState, useEffect } from 'react'
 import Script from 'next/script'
 import { useSession } from 'next-auth/react'
 import { fetchuser, fetchpayments, initiate } from '@/actions/useraction'
+import { useSearchParams } from 'next/navigation'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+import { Bounce } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 
 const PaymentPage = ({ username }) => {
   //const { data:session } =useSession()
 
-  const [paymentform, setPaymentform] = useState({})
+  const [paymentform, setPaymentform] = useState({name: "", message: "", amount: ""})
   const [currentUser, setcurrentUser] = useState({})
   const [payments, setPayments] = useState([])
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
   useEffect(() => {
     getData()
   }, [])
 
+  useEffect(() => {
+    if(searchParams.get("paymentdone") == "true"){
+    toast('Thanks for your donation!', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        });
+    }
+    router.push(`/${username}`)
+ 
+}, [])
+
   const handleChange = (e) => {
     setPaymentform({ ...paymentform, [e.target.name]: e.target.value })
   }
 
-  const getData = async (params) => {
+  const getData = async () => {
     let u = await fetchuser(username)
     setcurrentUser(u)
     let dbpayments = await fetchpayments(username)
@@ -58,6 +83,19 @@ const PaymentPage = ({ username }) => {
   }
   return (
     <>
+    <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light" />
+            {/* Same as */}
+            <ToastContainer />
       <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 
@@ -88,7 +126,7 @@ const PaymentPage = ({ username }) => {
                 return <li key={i} className='my-4 flex gap-2 items-center'>
                   <img width={33} src="avatar.gif" alt="" />
                   <span>
-                    {p.name} donated <span className='font-bold text-green-300'>₹{p.amount}</span> with a message <span className='font-bold text-green-300'>"{p.message}"</span>
+                    {p.name} donated <span className='font-bold '>₹{p.amount}</span> with a message &quot; {p.message} &quot;
                   </span>
                 </li>
               })}
@@ -101,8 +139,10 @@ const PaymentPage = ({ username }) => {
             <h2 className='text-2xl font-bold my-5 '>Make a Payment</h2>
             <div className="flex gap-2 flex-col">
               {/* input for name and message */}
+              <div>
               <input onChange={handleChange} value={paymentform.name} name='name' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Name' />
-              <input onChange={handleChange} value={paymentform.message} name='message' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Message' />
+              </div>
+               <input onChange={handleChange} value={paymentform.message} name='message' type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Message' />
 
 
               <input onChange={handleChange} value={paymentform.amount} name="amount" type="text" className='w-full p-3 rounded-lg bg-neutral-800' placeholder='Enter Amount' />
