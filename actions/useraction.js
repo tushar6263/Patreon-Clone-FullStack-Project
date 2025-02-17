@@ -7,6 +7,7 @@ import User from "@/models/User"
 
 
 
+
 export const initiate = async (amount, to_username, paymentform) => {
     await connectDb()
     //fetch the secret of the user who is getting the payment
