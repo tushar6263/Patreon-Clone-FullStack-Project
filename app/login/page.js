@@ -10,7 +10,6 @@ const Login = () => {
 
   useEffect(() => {
     document.title = "Login - Get Me A Chai" 
-    console.log(session)
     if (session) {
       router.push('/dashboard')
     }
@@ -159,3 +158,4 @@ const Login = () => {
 }
 
 export default Login
+
