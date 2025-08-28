@@ -4,7 +4,7 @@
 This is a **full-stack Patreon Clone** built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The project replicates key Patreon functionalities, allowing creators to share content and receive financial support from patrons.
 
 ## 🚀 Features
-- **User Authentication** (Signup/Login with JWT authentication)
+- **User Authentication** (Signup with Auth JS)
 - **Creator Dashboard** (Manage posts, earnings, and supporters)
 - **Patron Support** (Subscribe to creators and access exclusive content)
 - **Payment Integration** (Stripe integration for handling transactions)
@@ -22,7 +22,7 @@ This is a **full-stack Patreon Clone** built using the MERN stack (MongoDB, Expr
 - Node.js
 - Express.js
 - MongoDB (Mongoose ODM)
-- JWT Authentication
+- Auth JS
 
 ### **Payments & Other Integrations:**
 - Stripe API (for payments)
