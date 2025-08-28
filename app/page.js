@@ -6,10 +6,7 @@ export default function Home() {
     <>
       <div className="flex flex-col items-center h-[40vh] justify-center gap-4 px-5 md:px-0 text-xs md:text-base ">
         <div className="font-bold  flex gap-6 md:gap-20 md:text-5xl items-center justify-center text-3xl">
-          Get Me a Chai
-          <span>
-            <img className="invertImg" width={70} height={70} src="/tea.gif" alt="Chai" />
-          </span>
+          CreatorHub
         </div>
         <p className="text-center md:text-left">
           A crowdfunding platform for creators to fund their projects.
@@ -17,7 +14,7 @@ export default function Home() {
         </p>
         <p className="text-center md:text-left">
 
-          A place where your fans can buy you a chai. Unleash the power of your fans and get your projects funded.
+          A place where your fans can buy you a Purchase. Unleash the power of your fans and get your projects funded.
         </p>
         <div>
           <Link href={"/login"}>
@@ -42,7 +39,7 @@ export default function Home() {
       <div className="bg-white h-0.5 opacity-10"></div>
     
       <div className="text-white container mx-auto pb-32 pt-14 px-10">
-  <h2 className="text-3xl font-bold text-center mb-14">Your Fans can buy you a Chai</h2>
+  <h2 className="text-3xl font-bold text-center mb-14">Your Fans can support you</h2>
   <div className="flex gap-5 justify-around">
     <div className="item space-y-3 flex flex-col items-center justify-center">
       <img className="bg-slate-400 rounded-full p-2 text-black" width={88} src="/man.gif" alt="" />

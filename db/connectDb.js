@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 
 const connectDb = async () => {
     try {
-        const conn = await mongoose.connect(`mongodb://localhost:27017/chai`, {
+        const conn = await mongoose.connect(`mongodb://localhost:27017/CreatorHub`, {
             useNewUrlParser: true,
         });
         console.log(`mongoDB Connected: ${conn.connection.host}`);

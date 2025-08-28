@@ -9,7 +9,7 @@ const Login = () => {
   const router = useRouter()
 
   useEffect(() => {
-    document.title = "Login - Get Me A Chai" 
+    document.title = "Login - CreatorHub " 
     if (session) {
       router.push('/dashboard')
     }
