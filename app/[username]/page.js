@@ -1,4 +1,3 @@
-
 import React from 'react'
 import PaymentPage from '@/components/PaymentPage'
 import { notFound } from 'next/navigation'
@@ -6,28 +5,29 @@ import connectDb from '@/db/connectDb'
 import User from '@/models/User'
 
 const Username = async ({ params }) => {
-  //IF the usernane is not present in the database , shoe a 404 page
-  const checkUser = async () => {
-    await connectDb()
-    let u = await User.findOne({ username: params.username })
-    if (!u) {
-      return notFound()
-    }
+  // ✅ Await params
+  const { username } = await params
+
+  await connectDb()
+  let u = await User.findOne({ username }).lean() // ✅ plain object
+
+  if (!u) {
+    return notFound()
   }
-  await checkUser()
- 
 
   return (
     <>
-      <PaymentPage username={params.username} />
+      <PaymentPage username={username} />
     </>
   )
 }
 
 export default Username
 
-export async function generateMetadata(params) {
-  return{
-    title: `Support ${params.username}- CreatorHub`
+// ✅ generateMetadata receives { params }
+export async function generateMetadata({ params }) {
+  const { username } = await params
+  return {
+    title: `Support ${username} - CreatorHub`
   }
 }

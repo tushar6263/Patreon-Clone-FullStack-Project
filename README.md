@@ -1,7 +1,7 @@
 # Patreon Clone - Full Stack Project
 
 ## 📌 Overview
-This is a **full-stack Patreon Clone** built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The project replicates key Patreon functionalities, allowing creators to share content and receive financial support from patrons.
+This is a **full-stack Patreon like web app** built using the MERN stack (MongoDB, Express.js, React.js, Node.js). The project replicates key Patreon functionalities, allowing creators to share content and receive financial support from patrons.
 
 ## 🚀 Features
 - **User Authentication** (Signup with Auth JS)
@@ -29,11 +29,21 @@ This is a **full-stack Patreon Clone** built using the MERN stack (MongoDB, Expr
 - Cloudinary (for image uploads)
 - RESTful APIs
 
-## 📂 Project Setup
-### **Clone the Repository**
-```bash
-git clone https://github.com/tushar6263/Patreon-Clone-FullStack-Project.git
-cd Patreon-Clone-FullStack-Project
+### 🏠 Homepage
+![Homepage](./public/SS%20Image/HomePage.png)
+
+
+### 👥 SignUp
+![Members](./public/SS%20Image/SignUp%20Page.png)
+
+### 👥 Dashboard
+![Members](./public/SS%20Image//DashBoard.png)
+
+
+### 👥 Dashboard
+![Members](./public/SS%20Image/Profile1.png)
+![Members](./public/SS%20Image/Profile2.png)
+![Members](./public/SS%20Image/Payment.png)
 ```
 
 
